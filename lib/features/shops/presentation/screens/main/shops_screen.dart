@@ -27,32 +27,26 @@ class _ShopsScreenState extends State<ShopsScreen> {
       child: Scaffold(
         body: BlocBuilder<ShopsBloc, ShopsState>(builder: (context, state) {
           if (state is ShopsLoadingState) {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          }
-          if (state is ShopsLoadedState) {
+          } else if (state is ShopsLoadedState) {
             return ShopsLoadedScreen(
               shops: state.shops,
             );
-          }
-          if (state is ShopsErrorState) {
-            return const Scaffold(
-              body: Center(
-                child: Text('Error'),
-              ),
+          } else if (state is ShopsErrorState) {
+            return const Center(
+              child: Text('Error'),
+            );
+          } else if (state is ShopsEmptyState) {
+            return const Center(
+              child: Text('Empty Data'),
+            );
+          } else {
+            return const Center(
+              child: Text('Empty State'),
             );
           }
-          if (state is ShopsEmptyState) {
-            return const Scaffold(
-              body: Center(
-                child: Text('Empty'),
-              ),
-            );
-          }
-          return Container();
         }),
       ),
     );

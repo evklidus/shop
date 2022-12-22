@@ -1,11 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:shop/features/shops/data/datasources/shops_local_datasource.dart';
 
 import 'package:shop/features/shops/data/datasources/shops_remote_datasource.dart';
 import 'package:shop/features/shops/data/repositories/shops_repository_impl.dart';
 import 'package:shop/features/shops/domain/repositories/shops_repository.dart';
 import 'package:shop/features/shops/domain/usecases/get_shops.dart';
 import 'package:shop/features/shops/presentation/bloc/shops_bloc.dart';
+import 'package:shop/services/db/hive_db.dart';
 import 'package:shop/services/http/http_service.dart';
 import 'package:shop/services/http/network_info.dart';
 
@@ -25,6 +27,7 @@ Future<void> setup() async {
     () => ShopsRepositoryImpl(
       networkInfo: getIt(),
       shopsRemoteDataSource: getIt(),
+      shopsLocalDataSource: getIt(),
     ),
   );
 
@@ -32,14 +35,19 @@ Future<void> setup() async {
   getIt.registerLazySingleton<ShopsRemoteDataSource>(
     () => ShopsRemoteDataSourceImpl(getIt()),
   );
-  // getIt.registerLazySingleton<ShopsLocalDataSource>(
-  //   () => ShopsLocalDataSourceImpl(database: getIt()),
-  // );
+  getIt.registerLazySingleton<ShopsLocalDataSource>(
+    () => ShopsLocalDataSourceImpl(getIt()),
+  );
 
   // Services
+  final hiveDB = HiveDB();
+  await hiveDB.init();
+  getIt.registerLazySingleton<Database>(() => hiveDB);
+
   final InternetConnectionChecker internetConnectionChecker =
       InternetConnectionChecker();
   getIt.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(internetConnectionChecker));
+
   getIt.registerLazySingleton<HttpService>(() => HttpServiceImpl());
 }

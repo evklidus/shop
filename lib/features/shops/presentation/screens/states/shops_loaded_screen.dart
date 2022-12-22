@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/core/constants/app_constants.dart';
 import 'package:shop/features/shops/domain/entities/shop_entity.dart';
 import 'package:shop/features/shops/presentation/widgets/shop_widget.dart';
 
@@ -13,7 +14,7 @@ class ShopsLoadedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shop'),
+        title: const Text(AppConstants.appTitle),
       ),
       body: GridView(
         padding: const EdgeInsets.only(
