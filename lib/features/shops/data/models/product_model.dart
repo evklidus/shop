@@ -3,13 +3,11 @@ import 'package:shop/features/shops/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
   final List<ProductCharacteristicModel> characteristics;
-  final int id;
-  final String name;
 
   ProductModel({
     required this.characteristics,
-    required this.id,
-    required this.name,
+    required int id,
+    required String name,
   }) : super(id: id, name: name, productCharacteristics: characteristics);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -27,13 +25,12 @@ class ProductModel extends ProductEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['characteristics'] = this
-        .characteristics
+    final Map<String, dynamic> data = {};
+    data['characteristics'] = characteristics
         .map((characteristic) => characteristic.toJson())
         .toList();
-    data['id'] = this.id;
-    data['name'] = this.name;
+    data['id'] = id;
+    data['name'] = name;
     return data;
   }
 }

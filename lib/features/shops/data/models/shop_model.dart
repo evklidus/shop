@@ -2,14 +2,14 @@ import 'package:shop/features/shops/data/models/product_model.dart';
 import 'package:shop/features/shops/domain/entities/shop_entity.dart';
 
 class ShopModel extends ShopEntity {
-  final int id;
-  final String name;
-  final List<ProductModel> products;
+  // final int id;
+  // final String name;
+  // final List<ProductModel> products;
 
   ShopModel({
-    required this.id,
-    required this.name,
-    required this.products,
+    required int id,
+    required String name,
+    required List<ProductModel> products,
   }) : super(
           id: id,
           name: name,
@@ -27,11 +27,11 @@ class ShopModel extends ShopEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
     data['products'] =
-        this.products.map((product) => product.toJson()).toList();
+        products.map((product) => (product as ProductModel).toJson()).toList();
     return data;
   }
 }

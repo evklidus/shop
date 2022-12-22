@@ -1,12 +1,9 @@
 import 'package:shop/features/shops/domain/entities/product_characteristic_entity.dart';
 
 class ProductCharacteristicModel extends ProductCharacteristicEntity {
-  final int id;
-  final int weight;
-
   ProductCharacteristicModel({
-    required this.id,
-    required this.weight,
+    required int id,
+    required int weight,
   }) : super(
           id: id,
           weight: weight,
@@ -22,9 +19,9 @@ class ProductCharacteristicModel extends ProductCharacteristicEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['weight'] = this.weight;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['weight'] = weight;
     return data;
   }
 }

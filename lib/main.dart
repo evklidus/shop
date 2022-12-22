@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:shop/features/shops/presentation/screens/main/shops_screen.dart';
 import 'package:shop/services/di/get_it.dart' as di;
 
-void main() {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await Hive.initFlutter();
   di.setup();
   runApp(const MyApp());
 }

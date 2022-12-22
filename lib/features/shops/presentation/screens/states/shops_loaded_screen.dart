@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:shop/features/shops/domain/entities/shop_entity.dart';
 import 'package:shop/features/shops/presentation/widgets/shop_widget.dart';
 
