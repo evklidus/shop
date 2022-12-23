@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shop/core/constants/app_constants.dart';
 import 'package:shop/features/shops/domain/entities/shop_entity.dart';
 import 'package:shop/features/shops/presentation/widgets/shop_widget.dart';
 
@@ -12,27 +11,18 @@ class ShopsLoadedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(AppConstants.appTitle),
+    return GridView(
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 30,
+        crossAxisSpacing: 30,
       ),
-      body: GridView(
-        padding: const EdgeInsets.only(
-          top: 16,
-          left: 16,
-          right: 16,
-        ),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 30,
-          crossAxisSpacing: 30,
-        ),
-        children: shops
-            .map(
-              (shop) => ShopWidget(shop: shop),
-            )
-            .toList(),
-      ),
+      children: shops
+          .map(
+            (shop) => ShopWidget(shop: shop),
+          )
+          .toList(),
     );
   }
 }

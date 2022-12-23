@@ -6,3 +6,15 @@ abstract class ShopsEvent extends Equatable {
 }
 
 class LoadShopsEvent extends ShopsEvent {}
+
+class SetFiltersShopsEvent extends ShopsEvent {
+  final String name;
+  final int weight;
+
+  SetFiltersShopsEvent({
+    required this.name,
+    required this.weight,
+  });
+}
+
+class ResetFiltersShopsEvent extends ShopsEvent {}
