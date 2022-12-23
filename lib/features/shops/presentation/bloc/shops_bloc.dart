@@ -18,6 +18,7 @@ class ShopsBloc extends Bloc<ShopsEvent, ShopsState> {
         (failure) => ShopsErrorState(),
         (shops) => ShopsLoadedState(shops: shops),
       ));
+      _filters = null;
     });
     on<SetFiltersShopsEvent>((event, emit) async {
       emit(ShopsLoadingState());
@@ -27,6 +28,7 @@ class ShopsBloc extends Bloc<ShopsEvent, ShopsState> {
         (shops) {
           final List<ShopEntity>? filteredShops =
               filterShops(shops, event.name, event.weight);
+          _filters = event;
           if (filteredShops != null) {
             return ShopsLoadedState(shops: filteredShops);
           } else {
@@ -37,4 +39,9 @@ class ShopsBloc extends Bloc<ShopsEvent, ShopsState> {
     });
     on<ResetFiltersShopsEvent>((event, emit) => add(LoadShopsEvent()));
   }
+
+  SetFiltersShopsEvent? _filters;
+  SetFiltersShopsEvent? get filters => _filters;
+
+  bool get filtersSetted => filters != null;
 }

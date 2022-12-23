@@ -1,3 +1,4 @@
+import 'package:shop/features/shops/domain/entities/product_entity.dart';
 import 'package:shop/features/shops/domain/entities/shop_entity.dart';
 
 /*
@@ -23,6 +24,16 @@ bool _isShopHasProduct(
   String name,
   int weight,
 ) {
+  final bool hasProductFromFilters =
+      getProductFromFilters(shop, name, weight) != null;
+  return hasProductFromFilters;
+}
+
+ProductEntity? getProductFromFilters(
+  ShopEntity shop,
+  String name,
+  int weight,
+) {
   for (var product in shop.products) {
     final bool hasName = product.name == name;
     bool hasCharacteristic = false;
@@ -33,8 +44,8 @@ bool _isShopHasProduct(
       }
     }
     if (hasName && hasCharacteristic) {
-      return true;
+      return product;
     }
   }
-  return false;
+  return null;
 }
